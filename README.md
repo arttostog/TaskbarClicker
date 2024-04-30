@@ -17,5 +17,5 @@
 </div>
 
 - Go to [Releases](https://github.com/arttostog/MusicFrog/releases) and download the latest version of the app from there.
-- Run `TaskbarClicker.exe`.
+- Unpack the archive and run `TaskbarClicker.exe`.
 - Done!
