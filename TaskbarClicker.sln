@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskbarClicker", "TaskbarClicker\TaskbarClicker.csproj", "{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Debug|x64.ActiveCfg = Debug|x64
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Debug|x64.Build.0 = Debug|x64
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Release|x64.ActiveCfg = Release|x64
+		{6AA9EFCE-7C49-4942-A2F2-3A088FB4DC42}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F10DEA81-7C08-4E3C-87E9-670FEFB843BD}
+	EndGlobalSection
+EndGlobal
