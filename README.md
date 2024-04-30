@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="TaskbarClicker/1.png" width="128" height="128">
+<img src="TaskbarClicker/1.ico" width="128" height="128">
 
 # TackbarClicker - taskbar button.
 
