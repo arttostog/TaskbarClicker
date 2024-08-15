@@ -6,6 +6,7 @@ namespace TaskbarClicker
     internal static class Program
     {
         [STAThread]
-        static void Main() => Application.Run(new Clicker());
+        static void Main() =>
+            Application.Run(new Clicker());
     }
 }

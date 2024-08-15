@@ -2,57 +2,71 @@
 using System;
 using System.Windows.Forms;
 using System.Threading;
+using System.Drawing;
 
 namespace TaskbarClicker
 {
-    public class Clicker : ApplicationContext
+    internal class Clicker : ApplicationContext
     {
-        private readonly NotifyIcon _appIcon = new() { Icon = Resources._1, Visible = true };
-        private readonly ToolStripMenuItem _scoreItem = new("", Resources._1.ToBitmap());
+        private readonly Icon _buttonDefault = Resources._1, _buttonPressed = Resources._2;
+
+        private readonly NotifyIcon _notifyIcon = new() { Visible = true };
+        private readonly ToolStripMenuItem _scoreItem = new("");
+        private readonly ToolStripMenuItem _exitButton = new("Exit", null, (object sender, EventArgs eventArgs) => Application.Exit());
+        
         private ulong _score = User.Default.Score - 1;
-        private Thread _latestThread;
+
+        private Thread _buttonPressAnimationThread;
 
         public Clicker()
         {
+            _scoreItem.Image = _buttonDefault.ToBitmap();
+            _scoreItem.Click += OnScoreItemClick;
+
             ContextMenuStrip appIconMenu = new();
-            appIconMenu.Items.AddRange(new ToolStripMenuItem[] { _scoreItem, new("Exit", null, OnExit) });
-            _appIcon.ContextMenuStrip = appIconMenu;
+            appIconMenu.Items.AddRange([_scoreItem, _exitButton]);
+
+            _notifyIcon.Icon = _buttonDefault;
+            _notifyIcon.ContextMenuStrip = appIconMenu;
+            _notifyIcon.MouseClick += OnNotifyIconClick;
 
             Application.ApplicationExit += OnExit;
-            _scoreItem.Click += OnMouseClick;
-            _appIcon.MouseClick += OnMouseClick;
 
             UpdateTexts();
         }
 
-        private void OnMouseClick(object sender, EventArgs eventArgs)
+        private void OnNotifyIconClick(object sender, EventArgs eventArgs)
         {
-            _appIcon.Icon = Resources._2;
-            
-            try
-            {
-                if (((MouseEventArgs)eventArgs).Button == MouseButtons.Left) UpdateTexts();
-            }
-            catch (InvalidCastException) { UpdateTexts(); }
-
-            _latestThread?.Abort(); 
-            (_latestThread = new(ReturnButton)).Start();
+            if (((MouseEventArgs)eventArgs).Button == MouseButtons.Left)
+                OnScoreItemClick(sender, eventArgs);
         }
 
-        private void UpdateTexts() => _scoreItem.Text = _appIcon.Text = (++_score).ToString();
-
-        private void ReturnButton()
+        private void OnScoreItemClick(object sender, EventArgs eventArgs)
         {
-            Thread.Sleep(250);
-            _appIcon.Icon = Resources._1;
+            UpdateTexts();
+            StartButtonPressAnimation();
+        }
+
+        private void UpdateTexts() =>
+            _scoreItem.Text = _notifyIcon.Text = (++_score).ToString();
+
+        private void StartButtonPressAnimation()
+        {
+            if (!_notifyIcon.Icon.Equals(_buttonPressed))
+                _notifyIcon.Icon = _buttonPressed;
+
+            _buttonPressAnimationThread?.Abort();
+            (_buttonPressAnimationThread = new(() => {
+                Thread.Sleep(250);
+                _notifyIcon.Icon = _buttonDefault;
+            })).Start();
         }
 
         private void OnExit(object sender, EventArgs eventArgs)
         {
-            _appIcon.Visible = false;
+            _notifyIcon.Visible = false;
             User.Default.Score = _score;
             User.Default.Save();
-            Environment.Exit(0);
         }
     }
 }

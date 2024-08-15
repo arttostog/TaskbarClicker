@@ -53,6 +53,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <StartupObject>TaskbarClicker.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
